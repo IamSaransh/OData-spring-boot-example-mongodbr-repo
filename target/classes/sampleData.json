@@ -1,0 +1,14 @@
+{
+  "_id": "UUID",
+  "namespace": "OData.Demo",
+  "containerName": "Container",
+  "entitySetName" : "Products",
+  "entityName": "Product",
+  "fieldStringTypeMap":
+  {
+    "ID": "Edm.Int32",
+    "Name": "Edm.String",
+    "Description":"Edm.String"
+  }
+
+}
