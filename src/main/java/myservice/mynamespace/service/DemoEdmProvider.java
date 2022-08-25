@@ -18,53 +18,52 @@
  */
 package myservice.mynamespace.service;
 
-import myservice.mynamespace.repository.EntityMapperRepository;
-import org.apache.olingo.commons.api.edm.EdmPrimitiveTypeKind;
-import org.apache.olingo.commons.api.edm.FullQualifiedName;
-import org.apache.olingo.commons.api.edm.provider.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-@Component
+import myservice.mynamespace.repository.DummyRepository;
+import org.apache.olingo.commons.api.edm.EdmPrimitiveTypeKind;
+import org.apache.olingo.commons.api.edm.FullQualifiedName;
+import org.apache.olingo.commons.api.edm.provider.CsdlAbstractEdmProvider;
+import org.apache.olingo.commons.api.edm.provider.CsdlEntityContainer;
+import org.apache.olingo.commons.api.edm.provider.CsdlEntityContainerInfo;
+import org.apache.olingo.commons.api.edm.provider.CsdlEntitySet;
+import org.apache.olingo.commons.api.edm.provider.CsdlEntityType;
+import org.apache.olingo.commons.api.edm.provider.CsdlProperty;
+import org.apache.olingo.commons.api.edm.provider.CsdlPropertyRef;
+import org.apache.olingo.commons.api.edm.provider.CsdlSchema;
+
+import static myservice.mynamespace.repository.DummyRepository.CONTAINER_NAME;
+
 public class DemoEdmProvider extends CsdlAbstractEdmProvider {
   public static final String ENTITY_NAME  = "Account";
+  DummyRepository dummyRepository = new DummyRepository();
 
 
-//  DummyRepository repository = new DummyRepository();
-    @Autowired
-    EntityMapperRepository repository;
+   final FullQualifiedName CONTAINER =
+          new FullQualifiedName(dummyRepository.getEntitySchema().getNamespace(), CONTAINER_NAME);
+
+  // Entity Types Names
+
+  final FullQualifiedName ET_ACCOUNT_FQN = new FullQualifiedName(dummyRepository.getEntitySchema().getNamespace(), ENTITY_NAME);
 
 
-
+  // Entity Set Names
 
 
   @Override
   public CsdlEntityType getEntityType(FullQualifiedName entityTypeName) {
     // this method is called for one of the EntityTypes that are configured in the Schema
-    FullQualifiedName ET_PRODUCT_FQN = new FullQualifiedName(repository.findByEntityName(ENTITY_NAME).get().getNamespace()
-            , repository.findByEntityName(ENTITY_NAME).get().getEntityName());
-    if(ET_PRODUCT_FQN.equals(entityTypeName)){
+    if(ET_ACCOUNT_FQN.equals(entityTypeName)){
 
-      //create EntityType properties
-//      CsdlProperty id = new CsdlProperty().setName("ID").setType(EdmPrimitiveTypeKind.Int32.getFullQualifiedName());
-//      CsdlProperty name = new CsdlProperty().setName("Name").setType(EdmPrimitiveTypeKind.String.getFullQualifiedName());
-//      CsdlProperty  description = new CsdlProperty().setName("Description").setType(EdmPrimitiveTypeKind.String.getFullQualifiedName());
-
-      // create PropertyRef for Key element
       CsdlPropertyRef propertyRef = new CsdlPropertyRef();
-      propertyRef.setName(repository.findByEntityName(ENTITY_NAME).get().getIdFieldName());
+      propertyRef.setName(dummyRepository.getEntitySchema().getIdFieldName());
 
       // configure EntityType
       CsdlEntityType entityType = new CsdlEntityType();
-      entityType.setName(ENTITY_NAME);
+      entityType.setName(dummyRepository.getEntitySchema().getEntityName());
 //      entityType.setProperties(Arrays.asList(id, name, description));
-      Map<String, EdmPrimitiveTypeKind> entityFields  = repository.findByEntityName(ENTITY_NAME).get().getFieldStringTypeMap();
+      Map<String, EdmPrimitiveTypeKind> entityFields  = dummyRepository.getEntitySchema().getFieldStringTypeMap();
       List<CsdlProperty> csdlPropertyList = entityFields.entrySet().stream()
               .map((x) ->  new CsdlProperty().setName(x.getKey()).setType(x.getValue().getFullQualifiedName()))
               .collect(Collectors.toList());
@@ -80,18 +79,11 @@ public class DemoEdmProvider extends CsdlAbstractEdmProvider {
 
   @Override
   public CsdlEntitySet getEntitySet(FullQualifiedName entityContainer, String entitySetName)  {
-    FullQualifiedName CONTAINER = new FullQualifiedName(repository.findByEntityName(ENTITY_NAME).get().getNamespace(),
-            repository.findByEntityName(ENTITY_NAME).get().getContainerName());
-    FullQualifiedName ET_PRODUCT_FQN
-            = new FullQualifiedName(repository.findByEntityName(ENTITY_NAME).get().getNamespace()
-            , repository.findByEntityName(ENTITY_NAME).get().getEntityName());
-
-    final String ES_PRODUCT_NAME = repository.findByEntityName(ENTITY_NAME).get().getEntitySetName();
     if(entityContainer.equals(CONTAINER)){
-      if(entitySetName.equals(repository.findByEntityName(ENTITY_NAME).get().getEntitySetName())){
+      if(entitySetName.equals("Accounts")){
         CsdlEntitySet entitySet = new CsdlEntitySet();
-        entitySet.setName(ES_PRODUCT_NAME);
-        entitySet.setType(ET_PRODUCT_FQN);
+        entitySet.setName(dummyRepository.getEntitySchema().getEntitySetName());
+        entitySet.setType(DummyRepository.ET_ACCOUNT_FQN);
 
         return entitySet;
       }
@@ -103,10 +95,8 @@ public class DemoEdmProvider extends CsdlAbstractEdmProvider {
 
   @Override
   public CsdlEntityContainerInfo getEntityContainerInfo(FullQualifiedName entityContainerName) {
-    // This method is invoked when displaying the service document 
+    // This method is invoked when displaying the service document
     // at e.g. http://localhost:8080/DemoService/DemoService.svc
-    FullQualifiedName CONTAINER = new FullQualifiedName(repository.findByEntityName(ENTITY_NAME).get().getNamespace(),
-            repository.findByEntityName(ENTITY_NAME).get().getContainerName());
     if(entityContainerName == null || entityContainerName.equals(CONTAINER)){
       CsdlEntityContainerInfo entityContainerInfo = new CsdlEntityContainerInfo();
       entityContainerInfo.setContainerName(CONTAINER);
@@ -119,23 +109,20 @@ public class DemoEdmProvider extends CsdlAbstractEdmProvider {
 
   @Override
   public List<CsdlSchema> getSchemas() {
-    FullQualifiedName ET_PRODUCT_FQN
-            = new FullQualifiedName(repository.findByEntityName(ENTITY_NAME).get().getNamespace()
-            , repository.findByEntityName(ENTITY_NAME).get().getEntityName());
     // create Schema
     CsdlSchema schema = new CsdlSchema();
-    schema.setNamespace(repository.findByEntityName(ENTITY_NAME).get().getNamespace());
+    schema.setNamespace(DummyRepository.NAMESPACE);
 
     // add EntityTypes
-    List<CsdlEntityType> entityTypes = new ArrayList<>();
-    entityTypes.add(getEntityType(ET_PRODUCT_FQN));
+    List<CsdlEntityType> entityTypes = new ArrayList<CsdlEntityType>();
+    entityTypes.add(getEntityType(DummyRepository.ET_ACCOUNT_FQN));
     schema.setEntityTypes(entityTypes);
 
     // add EntityContainer
     schema.setEntityContainer(getEntityContainer());
 
     // finally
-    List<CsdlSchema> schemas = new ArrayList<>();
+    List<CsdlSchema> schemas = new ArrayList<CsdlSchema>();
     schemas.add(schema);
 
     return schemas;
@@ -145,14 +132,12 @@ public class DemoEdmProvider extends CsdlAbstractEdmProvider {
   @Override
   public CsdlEntityContainer getEntityContainer() {
     // create EntitySets
-    FullQualifiedName CONTAINER = new FullQualifiedName(repository.findByEntityName(ENTITY_NAME).get().getNamespace(),
-            repository.findByEntityName(ENTITY_NAME).get().getContainerName());
-    List<CsdlEntitySet> entitySets = new ArrayList<>();
-    entitySets.add(getEntitySet(CONTAINER, repository.findByEntityName(ENTITY_NAME).get().getEntitySetName()));
+    List<CsdlEntitySet> entitySets = new ArrayList<CsdlEntitySet>();
+    entitySets.add(getEntitySet(CONTAINER, DummyRepository.ES_ACCOUNTS_NAME));
 
     // create EntityContainer
     CsdlEntityContainer entityContainer = new CsdlEntityContainer();
-    entityContainer.setName(repository.findByEntityName(ENTITY_NAME).get().getEntitySetName());
+    entityContainer.setName(CONTAINER_NAME);
     entityContainer.setEntitySets(entitySets);
 
     return entityContainer;

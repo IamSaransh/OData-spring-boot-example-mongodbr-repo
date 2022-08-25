@@ -19,7 +19,6 @@
 package myservice.mynamespace.data;
 
 import myservice.mynamespace.repository.DummyRepository;
-import myservice.mynamespace.repository.EntityMapperRepository;
 import myservice.mynamespace.util.Util;
 import org.apache.olingo.commons.api.data.Entity;
 import org.apache.olingo.commons.api.data.EntityCollection;
@@ -40,11 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-@Component
 public class Storage {
 
-	@Autowired
-	EntityMapperRepository repository;
 
 	private  List<Entity> productList;
 
@@ -62,7 +58,6 @@ public class Storage {
 		if(edmEntitySet.getName().equals(repository.getEntitySchema().getEntitySetName())){
 			return getProducts();
 		}
-
 		return null;
 	}
 

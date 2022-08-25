@@ -46,17 +46,15 @@ import org.apache.olingo.server.api.uri.UriResourceEntitySet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
 public class DemoEntityCollectionProcessor implements EntityCollectionProcessor {
 
 	private OData odata;
 	private ServiceMetadata serviceMetadata;
-	@Autowired
 	private Storage storage;
 
-//	public DemoEntityCollectionProcessor(Storage storage) {
-//		this.storage = storage;
-//	}
+	public DemoEntityCollectionProcessor(Storage storage) {
+		this.storage = storage;
+	}
 
 	public void init(OData odata, ServiceMetadata serviceMetadata) {
 		this.odata = odata;

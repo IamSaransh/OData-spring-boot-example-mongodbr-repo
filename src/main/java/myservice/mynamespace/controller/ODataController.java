@@ -31,29 +31,19 @@ import java.util.ArrayList;
 public class ODataController {
 
     protected static final String URI = "/odata";
-    @Autowired
-    Storage storage;
-    @Autowired
-    DemoEntityCollectionProcessor demoEntityCollectionProcessor;
-
-    @Autowired
-    DemoEntityProcessor demoEntityProcessor;
-
-    @Autowired
-    DemoPrimitiveProcessor demoPrimitiveProcessor;
 
     @RequestMapping(value = "*")
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         OData odata = OData.newInstance();
         ServiceMetadata edm = odata.createServiceMetadata(new DemoEdmProvider(),
                 new ArrayList<EdmxReference>());
-//        Storage storage = new Storage();
+        Storage storage = new Storage();
 
             // create odata handler and configure it with EdmProvider and Processor
             ODataHttpHandler handler = odata.createHandler(edm);
-            handler.register(demoEntityCollectionProcessor);
-            handler.register(demoEntityProcessor);
-            handler.register(demoPrimitiveProcessor);
+            handler.register(new DemoEntityCollectionProcessor(storage));
+            handler.register(new DemoEntityProcessor(storage));
+            handler.register(new DemoPrimitiveProcessor(storage));
             handler.process(new HttpServletRequestWrapper(request) {
                 // Spring MVC matches the whole path as the servlet path
                 // Olingo wants just the prefix, ie upto /OData/V1.0, so that it

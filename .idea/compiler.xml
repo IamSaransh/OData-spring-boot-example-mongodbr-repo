@@ -7,15 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ODataPoc" />
         <module name="DemoService-ReadEp" />
-        <module name="ODataCts" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="DemoService-ReadEp" options="-parameters" />
-      <module name="ODataCts" options="-parameters" />
+      <module name="ODataPoc" options="-parameters" />
     </option>
   </component>
 </project>

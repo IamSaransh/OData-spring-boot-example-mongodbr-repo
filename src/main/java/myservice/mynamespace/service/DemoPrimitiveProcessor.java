@@ -52,17 +52,15 @@ import org.apache.olingo.server.api.uri.UriResourceProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
 public class DemoPrimitiveProcessor implements PrimitiveProcessor {
 
 	private OData odata;
-	@Autowired
 	private Storage storage;
   	private ServiceMetadata serviceMetadata;
 
-//	public DemoPrimitiveProcessor(Storage storage) {
-//		this.storage = storage;
-//	}
+	public DemoPrimitiveProcessor(Storage storage) {
+		this.storage = storage;
+	}
 
 	public void init(OData odata, ServiceMetadata serviceMetadata) {
 		this.odata = odata;

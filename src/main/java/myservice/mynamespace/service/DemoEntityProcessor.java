@@ -50,20 +50,19 @@ import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
 public class DemoEntityProcessor implements EntityProcessor {
 
 
 	private OData odata;
 	private ServiceMetadata serviceMetadata;
-	@Autowired
 	private Storage storage;
 
 
 
-//	public DemoEntityProcessor(Storage storage) {
-//		this.storage = storage;
-//	}
+
+	public DemoEntityProcessor(Storage storage) {
+		this.storage = storage;
+	}
 
 
 	public void init(OData odata, ServiceMetadata serviceMetadata) {

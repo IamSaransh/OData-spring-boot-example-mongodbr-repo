@@ -21,11 +21,11 @@ public class DummyRepository {
     public static final FullQualifiedName CONTAINER = new FullQualifiedName(NAMESPACE, CONTAINER_NAME);
 
     // Entity Types Names
-    public static final String ET_PRODUCT_NAME = "Product";
-    public static final FullQualifiedName ET_PRODUCT_FQN = new FullQualifiedName(NAMESPACE, ET_PRODUCT_NAME);
+    public static final String ET_ACCOUNT_NAME = "Account";
+    public static final FullQualifiedName ET_ACCOUNT_FQN = new FullQualifiedName(NAMESPACE, ET_ACCOUNT_NAME);
 
     // Entity Set Names
-    public static final String ES_PRODUCTS_NAME = "Products";
+    public static final String ES_ACCOUNTS_NAME = "Accounts";
 
     /**
      * this is just mocking the repository, this will come from the repo;
@@ -37,19 +37,19 @@ public class DummyRepository {
         fieldsMap.put("Name", EdmPrimitiveTypeKind.String);
         fieldsMap.put("Description", EdmPrimitiveTypeKind.String);
 
-        Map<String,String> engineToClient = new HashMap<>();
-        engineToClient.put("ID", "partyId");
-        engineToClient.put("Name", "partyName");
-        engineToClient.put("Description", "partyDesc");
+        Map<String,String> serverToClientFieldMap = new HashMap<>();
+        serverToClientFieldMap.put("ID", "partyId");
+        serverToClientFieldMap.put("Name", "partyName");
+        serverToClientFieldMap.put("Description", "partyDesc");
 
         Mapper mapper = Mapper.builder()
                 .namespace(NAMESPACE)
                 .containerName(CONTAINER_NAME)
-                .entitySetName(ES_PRODUCTS_NAME)
-                .entityName(ET_PRODUCT_NAME)
+                .entitySetName(ES_ACCOUNTS_NAME)
+                .entityName(ET_ACCOUNT_NAME)
                 .idFieldName("ID")
                 .fieldStringTypeMap(fieldsMap)
-                .mappingToBackendModel(engineToClient)
+                .mappingToBackendModel(serverToClientFieldMap)
                 .build();
         return mapper;
     }
