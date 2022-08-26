@@ -25,6 +25,7 @@ import org.apache.olingo.commons.api.edm.provider.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,16 +36,20 @@ import java.util.stream.Collectors;
 public class DemoEdmProvider extends CsdlAbstractEdmProvider {
   public static final String ENTITY_NAME  = "Account";
 
+  EntityMapperRepository repository;
+  @Autowired
+  public DemoEdmProvider(EntityMapperRepository repository) {
+    this.repository = repository;
+  }
 
-//  DummyRepository repository = new DummyRepository();
-    @Autowired
-    EntityMapperRepository repository;
+
 
 
 
 
 
   @Override
+
   public CsdlEntityType getEntityType(FullQualifiedName entityTypeName) {
     // this method is called for one of the EntityTypes that are configured in the Schema
     FullQualifiedName ET_PRODUCT_FQN = new FullQualifiedName(repository.findByEntityName(ENTITY_NAME).get().getNamespace()

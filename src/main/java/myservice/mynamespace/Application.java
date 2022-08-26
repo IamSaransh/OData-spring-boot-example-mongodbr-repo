@@ -20,7 +20,6 @@ import java.util.Optional;
  */
 @Slf4j
 @SpringBootApplication
-@EnableMongoRepositories
 public class Application implements CommandLineRunner {
     public static final String NAMESPACE = "OData.Demo";
 

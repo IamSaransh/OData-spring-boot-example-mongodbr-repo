@@ -18,8 +18,6 @@
  */
 package myservice.mynamespace.data;
 
-import myservice.mynamespace.repository.DummyRepository;
-import myservice.mynamespace.repository.EntityMapperRepository;
 import myservice.mynamespace.util.Util;
 import org.apache.olingo.commons.api.data.Entity;
 import org.apache.olingo.commons.api.data.EntityCollection;
@@ -43,8 +41,6 @@ import java.util.Locale;
 @Component
 public class Storage {
 
-	@Autowired
-	EntityMapperRepository repository;
 
 	private  List<Entity> productList;
 
@@ -57,9 +53,8 @@ public class Storage {
 
 	public EntityCollection readEntitySetData(EdmEntitySet edmEntitySet)throws ODataApplicationException{
 
-		DummyRepository repository = new DummyRepository();
 		// actually, this is only required if we have more than one Entity Sets
-		if(edmEntitySet.getName().equals(repository.getEntitySchema().getEntitySetName())){
+		if(edmEntitySet.getName().equals("Accounts")){
 			return getProducts();
 		}
 

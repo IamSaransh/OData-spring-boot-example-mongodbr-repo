@@ -22,6 +22,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @SuppressWarnings("JpaAttributeTypeInspection")
 public class Mapper {
     @Id

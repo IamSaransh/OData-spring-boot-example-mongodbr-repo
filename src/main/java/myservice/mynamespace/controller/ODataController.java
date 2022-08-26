@@ -1,7 +1,9 @@
 package myservice.mynamespace.controller;
 
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import myservice.mynamespace.data.Storage;
+import myservice.mynamespace.repository.EntityMapperRepository;
 import myservice.mynamespace.service.DemoEdmProvider;
 import myservice.mynamespace.service.DemoEntityCollectionProcessor;
 import myservice.mynamespace.service.DemoEntityProcessor;
@@ -10,7 +12,11 @@ import org.apache.olingo.commons.api.edmx.EdmxReference;
 import org.apache.olingo.server.api.OData;
 import org.apache.olingo.server.api.ODataHttpHandler;
 import org.apache.olingo.server.api.ServiceMetadata;
+import org.apache.olingo.server.api.processor.EntityCollectionProcessor;
+import org.apache.olingo.server.api.processor.EntityProcessor;
+import org.apache.olingo.server.api.processor.PrimitiveProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,25 +33,29 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping(ODataController.URI)
-@Log4j2
+@Slf4j
 public class ODataController {
 
     protected static final String URI = "/odata";
+
+    @Autowired
+    EntityMapperRepository repository;
     @Autowired
     Storage storage;
     @Autowired
-    DemoEntityCollectionProcessor demoEntityCollectionProcessor;
+    EntityCollectionProcessor demoEntityCollectionProcessor;
 
     @Autowired
-    DemoEntityProcessor demoEntityProcessor;
+    EntityProcessor demoEntityProcessor;
 
     @Autowired
-    DemoPrimitiveProcessor demoPrimitiveProcessor;
+    PrimitiveProcessor demoPrimitiveProcessor;
 
     @RequestMapping(value = "*")
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        log.warn(repository.findByEntityName("Account").get().toString());
         OData odata = OData.newInstance();
-        ServiceMetadata edm = odata.createServiceMetadata(new DemoEdmProvider(),
+        ServiceMetadata edm = odata.createServiceMetadata(new DemoEdmProvider(repository),
                 new ArrayList<EdmxReference>());
 //        Storage storage = new Storage();
 
@@ -55,10 +65,6 @@ public class ODataController {
             handler.register(demoEntityProcessor);
             handler.register(demoPrimitiveProcessor);
             handler.process(new HttpServletRequestWrapper(request) {
-                // Spring MVC matches the whole path as the servlet path
-                // Olingo wants just the prefix, ie upto /OData/V1.0, so that it
-                // can parse the rest of it as an OData path. So we need to override
-                // getServletPath()
                 @Override
                 public String getServletPath() {
                     return ODataController.URI;
