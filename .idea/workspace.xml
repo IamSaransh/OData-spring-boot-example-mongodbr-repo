@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afeee023-06e5-4f03-9a4c-99bfa08d7681" name="Changes" comment="spring boot conversion">
+    <list default="true" id="afeee023-06e5-4f03-9a4c-99bfa08d7681" name="Changes" comment="Feat:Basic Dummy Repo Impl">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/config/Configuration.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/controller/ODataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/controller/ODataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/data/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/data/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/repository/DummyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/repository/DummyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/repository/EntityMapperRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEdmProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEdmProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEntityCollectionProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEntityCollectionProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEntityProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEntityProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoPrimitiveProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoPrimitiveProcessor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +65,13 @@
     "spring.configuration.checksum": "d1adb0eb59722f138c74c2df0d316099"
   }
 }]]></component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
   <component name="RunManager" selected="Spring Boot.Application (1)">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="myservice.mynamespace.util.tester.Main" />
@@ -154,7 +153,7 @@
       <workItem from="1661365654400" duration="26000" />
       <workItem from="1661376243943" duration="8282000" />
       <workItem from="1661413902318" duration="11365000" />
-      <workItem from="1661431994423" duration="2110000" />
+      <workItem from="1661431994423" duration="4757000" />
     </task>
     <task id="LOCAL-00001" summary="spring boot conversion">
       <created>1661432189726</created>
@@ -163,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661432189726</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Feat:Basic Dummy Repo Impl">
+      <created>1661434361922</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1661434361922</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +189,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="spring boot conversion" />
-    <option name="LAST_COMMIT_MESSAGE" value="spring boot conversion" />
+    <MESSAGE value="Feat:Basic Dummy Repo Impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat:Basic Dummy Repo Impl" />
   </component>
 </project>

@@ -59,6 +59,13 @@ public class DemoEdmProvider extends CsdlAbstractEdmProvider {
       CsdlPropertyRef propertyRef = new CsdlPropertyRef();
       propertyRef.setName(dummyRepository.getEntitySchema().getIdFieldName());
 
+
+      //create EntityType properties
+//      CsdlProperty id = new CsdlProperty().setName("ID").setType(EdmPrimitiveTypeKind.Int32.getFullQualifiedName());
+//      CsdlProperty name = new CsdlProperty().setName("Name").setType(EdmPrimitiveTypeKind.String.getFullQualifiedName());
+//      CsdlProperty  description = new CsdlProperty().setName("Description").setType(EdmPrimitiveTypeKind.String.getFullQualifiedName()
+
+
       // configure EntityType
       CsdlEntityType entityType = new CsdlEntityType();
       entityType.setName(dummyRepository.getEntitySchema().getEntityName());

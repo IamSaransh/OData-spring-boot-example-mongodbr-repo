@@ -46,8 +46,7 @@ public class ODataController {
             handler.register(new DemoPrimitiveProcessor(storage));
             handler.process(new HttpServletRequestWrapper(request) {
                 // Spring MVC matches the whole path as the servlet path
-                // Olingo wants just the prefix, ie upto /OData/V1.0, so that it
-                // can parse the rest of it as an OData path. So we need to override
+                // Olingo wants just the prefix, ie upto /OData/V1.0,
                 // getServletPath()
                 @Override
                 public String getServletPath() {
