@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afeee023-06e5-4f03-9a4c-99bfa08d7681" name="Changes" comment="Feat:Basic Dummy Repo Impl">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/controller/ODataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/controller/ODataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEdmProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/myservice/mynamespace/service/DemoEdmProvider.java" afterDir="false" />
-    </list>
+    <list default="true" id="afeee023-06e5-4f03-9a4c-99bfa08d7681" name="Changes" comment="Feat:Basic Dummy Repo Impl" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -153,7 +149,7 @@
       <workItem from="1661365654400" duration="26000" />
       <workItem from="1661376243943" duration="8282000" />
       <workItem from="1661413902318" duration="11365000" />
-      <workItem from="1661431994423" duration="4757000" />
+      <workItem from="1661431994423" duration="5372000" />
     </task>
     <task id="LOCAL-00001" summary="spring boot conversion">
       <created>1661432189726</created>
@@ -169,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661434361922</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Feat:Basic Dummy Repo Impl">
+      <created>1661488539540</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1661488539540</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
